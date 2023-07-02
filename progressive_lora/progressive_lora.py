@@ -11,6 +11,7 @@ from minlora import (
     add_lora,
     apply_to_lora,
     merge_lora,
+    get_lora_params,
 )
 
 from functools import partial
@@ -23,7 +24,7 @@ lora_config = {
 }
 
 
-def create_lora(model, lora_config=lora_config):
+def create_lora(model, model_head, lora_config=lora_config):
     """
     Main function of the module
     """
@@ -35,9 +36,13 @@ def create_lora(model, lora_config=lora_config):
 
     # for a specific layer named Head (nn.Module)
     # we don't want to apply LoRa
-    merge_lora(model.Head)
+    merge_lora(model_head)
 
-    return model
+    parameters = [
+    {"params": list(get_lora_params(model))},
+    ]
+
+    return model, parameters
 
 def save_lora(model, path):
     """
