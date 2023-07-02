@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "progressive-lora"
+version = "0.1.0"
+description = "A package to train neural nets progressively with LoRA"
+authors = ["Adrien Bufort"]
+license = "Apache 2.0"
+readme = "README.md"
+packages = [{include = "progressive_lora"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+torch = "2.0"
+minlora = {git = "https://github.com/cccntu/minLoRA.git"}
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
